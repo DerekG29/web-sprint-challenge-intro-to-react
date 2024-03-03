@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-function Character() { // ❗ Add the props
+function Character({ char, planets }) { // ❗ Add the props
   
   const [showPlanet, setShowPlanet] = useState(false);
   
@@ -8,9 +8,16 @@ function Character() { // ❗ Add the props
     setShowPlanet(!showPlanet);
   }
 
+  const planet = planets.filter(planet => char.homeworld === planet.id)
+
   return (
-    <div>
-      {/* Use the same markup with the same attributes as in the mock */}
+    <div className='character-card' onClick={togglePlanet}>
+      <h3 className='character-name'>{char.name}</h3>
+      {
+        showPlanet
+        ? <p>Planet: <span className='character-planet'>{planet[0].name}</span></p>
+        : null
+      } 
     </div>
   )
 }
